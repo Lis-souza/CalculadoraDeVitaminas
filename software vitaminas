@@ -1,0 +1,375 @@
+/*Um software que armazene uma lista de alimentos consumidos no dia e retorne aproximadamente quais vitaminas estão em falta no
+ organismo do adulto.
+ A lista de consumo diária é alimentada pelo usuário e o software faz os cálculos de vitaminas de acordo com a quantidade diária recomendada.
+ O usuário tem a possibilidade de adicionar outros alimentos e suas informações nutricionais. */
+
+ 
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+ 
+
+const int ALIMENTO_CONSUMIDO = 1;
+const int CADASTRAR_ALIMENTO = 2;
+const int EXIBIR_ALIMENTOS_CADASTRADOS = 3;
+const int EXIBIR_ALIMENTOS_CONSUMIDOS = 4;
+const int CALCULAR_CONSUMO = 5;
+
+ 
+
+int NumeroAlimentoConsumido;   //variável que armazena número do alimento Consumido vindo do menu//
+
+ 
+
+struct COMIDA
+{
+        float vitaminaA;
+        float vitaminaB;
+        float vitaminaC;
+        float vitaminaD;
+        float vitaminaE;
+        float vitaminaK;
+
+ 
+
+        std::string nomeDoAlimento;
+};
+
+ 
+
+/*CADASTRANDO NOVOS ALIMENTOS*/
+std::vector<struct COMIDA> alimentosDisponiveis;
+
+ 
+
+/*SOMA A QUATIDADE DE CADA VITAMINA CONSUMIDA E FAZ A COMPARAÇÃO DA LISTA DE ALIMENTOS CONSUMIDOS COM A QUANTIDADE RECOMENDADA*/
+std::vector<struct COMIDA> listaDeConsumidos;
+
+ 
+
+void adicionarNovoAlimento()
+{
+    struct COMIDA novaComida;
+
+ 
+
+    std::cout << "Informe o nome do alimento:" << std::endl;
+    std::cin >> novaComida.nomeDoAlimento;
+
+ 
+
+    std::cout << "Informe a quantidade de vitamina A:" << std::endl;
+    std::cin >> novaComida.vitaminaA;
+
+ 
+
+    std::cout << "Informe a quantidade de vitamina B:" << std::endl;
+    std::cin >> novaComida.vitaminaB;
+
+ 
+
+    std::cout << "Informe a quantidade de vitamina C:" << std::endl;
+    std::cin >> novaComida.vitaminaC;
+
+ 
+
+    std::cout << "Informe a quantidade de vitamina D:" << std::endl;
+    std::cin >> novaComida.vitaminaD;
+
+ 
+
+    std::cout << "Informe a quantidade de vitamina E:" << std::endl;
+    std::cin >> novaComida.vitaminaE;
+
+ 
+
+    std::cout << "Informe a quantidade de vitamina K:" << std::endl;
+    std::cin >> novaComida.vitaminaK;
+
+ 
+
+    alimentosDisponiveis.push_back(novaComida);
+}
+
+ 
+
+/*EXIBE UMA LISTA DOS ALIMENTOS CADASTRADOS E SUA POSIÇÃO(CÓDIGO)*/
+void mostrarAlimentosCadastrados()
+{
+    for (int i = 0; i < alimentosDisponiveis.size(); i++)
+    {
+
+ 
+
+        std::cout << i << " - " << alimentosDisponiveis[i].nomeDoAlimento << std::endl;
+
+ 
+
+        // exibir i tambem, que é a posição.
+    }
+}
+
+ 
+
+void adicionarAlimentosConsumidos()
+{
+
+ 
+
+    mostrarAlimentosCadastrados();
+
+ 
+
+    std::cout << "Digite o código do alimento que foi consumido" << std::endl;
+
+ 
+
+    std::cin >> NumeroAlimentoConsumido;
+
+ 
+
+    //pega alimento escolhido do alimento disponivel e coloca no consumido
+    listaDeConsumidos.push_back(alimentosDisponiveis[NumeroAlimentoConsumido]);
+}
+
+ void mostrarAlimentosConsumidos()
+ {
+ 
+ for (int i = 0; i < listaDeConsumidos.size(); i++)
+    {
+
+ 
+
+        std::cout << i << " - " << listaDeConsumidos[i].nomeDoAlimento << std::endl;
+ 
+    }
+ }
+ 
+
+void calculaAsQtdesCorretas()
+{
+
+ 
+
+    float qtdeDeVitaminaA = 0;
+    float qtdeDeVitaminaB = 0;
+    float qtdeDeVitaminaC = 0;
+    float qtdeDeVitaminaD = 0;
+    float qtdeDeVitaminaE = 0;
+    float qtdeDeVitaminaK = 0;
+
+ 
+
+    for (int i = 0; i < listaDeConsumidos.size(); i++)
+    {
+
+ 
+
+        qtdeDeVitaminaA = qtdeDeVitaminaA + listaDeConsumidos[i].vitaminaA;
+        qtdeDeVitaminaB = qtdeDeVitaminaB + listaDeConsumidos[i].vitaminaB;
+        qtdeDeVitaminaA = qtdeDeVitaminaC + listaDeConsumidos[i].vitaminaC;
+        qtdeDeVitaminaB = qtdeDeVitaminaD + listaDeConsumidos[i].vitaminaD;
+        qtdeDeVitaminaA = qtdeDeVitaminaE + listaDeConsumidos[i].vitaminaE;
+        qtdeDeVitaminaB = qtdeDeVitaminaK + listaDeConsumidos[i].vitaminaK;
+    }
+
+ 
+
+    if (qtdeDeVitaminaA < 0.9)
+    {
+        std::cout << "Consumo de vitamina A abaixo da média diária recomendada" << std::endl;
+    } else if (qtdeDeVitaminaA > 0.9)
+    {
+        std::cout << "Consumo de vitamina A acima da média diária recomendada" << std::endl;
+    }
+
+ 
+
+    else
+    {
+
+ 
+
+        std::cout << "Você consumiu a quantidade ideal de vitamina A por dia" << std::endl;
+    }
+
+ 
+
+    if (qtdeDeVitaminaB < 5)
+    {
+        std::cout << "Consumo de vitamina B abaixo da média diária recomendada" << std::endl;
+    } else if (qtdeDeVitaminaA > 5)
+    {
+        std::cout << "Consumo de vitamina B acima da média diária recomendada" << std::endl;
+    }
+
+ 
+
+    else
+    {
+
+ 
+
+        std::cout << "Você consumiu a quantidade ideal de vitamina B por dia" << std::endl;
+    }
+
+ 
+
+    if (qtdeDeVitaminaC < 90)
+    {
+        std::cout << "Consumo de vitamina C abaixo da média diária recomendada" << std::endl;
+    } else if (qtdeDeVitaminaA > 90)
+    {
+        std::cout << "Consumo de vitamina C acima da média diária recomendada" << std::endl;
+    }
+
+ 
+
+    else
+    {
+
+ 
+
+        std::cout << "Você consumiu a quantidade ideal de vitamina C por dia" << std::endl;
+    }
+
+ 
+
+    if (qtdeDeVitaminaD < 0.15)
+    {
+        std::cout << "Consumo de vitamina D abaixo da média diária recomendada" << std::endl;
+    } else if (qtdeDeVitaminaA > 0.15)
+    {
+        std::cout << "Consumo de vitamina D acima da média diária recomendada" << std::endl;
+    }
+
+ 
+
+    else
+    {
+
+ 
+
+        std::cout << "Você consumiu a quantidade ideal de vitamina D por dia" << std::endl;
+    }
+
+ 
+
+    if (qtdeDeVitaminaE < 15)
+    {
+        std::cout << "Consumo de vitamina E abaixo da média diária recomendada" << std::endl;
+    } else if (qtdeDeVitaminaA > 15)
+    {
+        std::cout << "Consumo de vitamina E acima da média diária recomendada" << std::endl;
+    }
+
+ 
+
+    else
+    {
+
+ 
+
+        std::cout << "Você consumiu a quantidade ideal de vitamina E por dia" << std::endl;
+    }
+
+ 
+
+    if (qtdeDeVitaminaK < 0.12)
+    {
+        std::cout << "Consumo de vitamina K abaixo da média diária recomendada" << std::endl;
+    } else if (qtdeDeVitaminaA > 0.12)
+    {
+        std::cout << "Consumo de vitamina K acima da média diária recomendada" << std::endl;
+    }
+
+ 
+
+    else
+    {
+
+ 
+
+        std::cout << "Você consumiu a quantidade ideal de vitamina K por dia" << std::endl;
+    }
+
+ 
+
+}
+
+ 
+
+int exibeMenu()
+{
+    std::cout << "O que deseja fazer?\n " << std::endl;
+    std::cout << ALIMENTO_CONSUMIDO << " - Inserir alimento consumido" << std::endl;
+    std::cout << CADASTRAR_ALIMENTO << " - Cadastrar novo alimento" << std::endl;
+    std::cout << EXIBIR_ALIMENTOS_CADASTRADOS << " - Exibir alimentos cadastrados" << std::endl;
+    std::cout << EXIBIR_ALIMENTOS_CONSUMIDOS << " - Exibir alimentos consumidos" << std::endl;
+    std::cout << CALCULAR_CONSUMO << " - Calcular consumo diário \n" << std::endl;
+
+ 
+
+    int escolha = 0;
+    std::cin >> escolha;
+    return escolha;
+}
+
+ 
+
+int main(int argc, char **argv)
+{
+
+ 
+
+    while (true)
+
+ 
+
+    {
+        int escolha = exibeMenu();
+        {
+
+ 
+
+            switch (escolha)
+            {
+                case ALIMENTO_CONSUMIDO:
+                    adicionarAlimentosConsumidos();
+                    break;
+
+ 
+
+                case CADASTRAR_ALIMENTO:
+                    adicionarNovoAlimento();
+                    break;
+
+ 
+
+                case EXIBIR_ALIMENTOS_CADASTRADOS:
+                    mostrarAlimentosCadastrados();
+                    break;
+                    
+                case EXIBIR_ALIMENTOS_CONSUMIDOS:
+                     mostrarAlimentosConsumidos();
+                     break;
+
+                case CALCULAR_CONSUMO:
+                    calculaAsQtdesCorretas();
+                    break;
+
+
+
+
+                default:
+                    std::cout << "Opção inválida" << std::endl;
+                    break;
+            }
+
+ 
+
+        }
+    }
+}
